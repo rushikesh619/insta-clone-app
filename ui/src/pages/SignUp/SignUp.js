@@ -14,6 +14,8 @@ class SignUp extends Component {
     }
     newSignUp=()=>{
         const data = {
+            email:this.state.emailId,
+            name:this.state.name,
             username: this.state.userName,
             password: this.state.password
         }

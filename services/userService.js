@@ -11,7 +11,7 @@ const createUser = async (doc) => {
     if (existingUser.length === 0) {
       let user = new User({
         email: doc.email,
-        fullname: doc.fullname,
+        fullname: doc.name,
         username: doc.username,
         password: doc.password,
       });
