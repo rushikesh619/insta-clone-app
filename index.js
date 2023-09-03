@@ -30,12 +30,12 @@ app.use(fileupload({
   useTempFiles: true
 }));
 
-app.get("*.*", express.static("https://rushikesh-insta-clone-app.s3.ap-south-1.amazonaws.com/build"));
+app.get("*.*", express.static(__dirname + "/ui/build"));
 
 api(app);
 
 app.all("*", function (req, res) {
-  res.status(200).sendFile(`/`, { root: "https://rushikesh-insta-clone-app.s3.ap-south-1.amazonaws.com/build" });
+  res.status(200).sendFile(`/`, { root: __dirname + "/ui/build" });
 });
 
 const port = process.env.PORT || 3001;
