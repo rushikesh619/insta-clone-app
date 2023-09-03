@@ -36,7 +36,7 @@ class SignUp extends Component {
     render() { 
         return ( 
             <div>
-                <input className="logipage__text" onChange={(event)=>{this.setState({emailId: event.currentTarget.value});}} type="text" placeholder="Mobile number or Email" />
+                <input className="logipage__text" onChange={(event)=>{this.setState({emailId: event.currentTarget.value});}} type="text" placeholder="Email" />
                 <input className="logipage__text" onChange={(event)=>{this.setState({name: event.currentTarget.value});}} type="text" placeholder="Full Name" />
                 <input className="logipage__text" onChange={(event)=>{this.setState({userName: event.currentTarget.value});}} type="text" placeholder="Username" />
                 <input className="logipage__text" onChange={(event)=>{this.setState({password: event.currentTarget.value});}} type="password" placeholder="Password" />

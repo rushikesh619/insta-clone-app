@@ -14,7 +14,7 @@ router.get("/", auth,(req,res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    console.log(req.body);
+    console.log("inside register handler: ", req.body);
     if (req.body) {
       if (req.body.username && req.body.password) {
         const data = req.body;

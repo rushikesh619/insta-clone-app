@@ -20,9 +20,8 @@ class SignIN extends Component {
       if (response.data) {
         console.log(response.data.user);
         if (response.data.user) {
-          for (const i in response.data) {
-            localStorage.setItem(i, JSON.stringify(response.data[i]));
-          }
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
           window.location.replace("/home");
         }
       }
@@ -39,7 +38,7 @@ class SignIN extends Component {
             this.setState({ username: event.currentTarget.value });
           }}
           type="text"
-          placeholder="username"
+          placeholder="Username"
         />
         <input
           className="logipage__text"

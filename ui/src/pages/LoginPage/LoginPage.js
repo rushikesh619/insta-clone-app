@@ -44,7 +44,7 @@ class LoginPage extends Component {
                                          this.state.isLogin ? <SignIN/> : <SignUp/>
                                      }
 
-                                        <div className="login__ordiv">
+                                        {/* <div className="login__ordiv">
                                             <div className="login__dividor"></div>
                                             <div className="login__or">OR</div>
                                             <div className="login__dividor"></div>
@@ -53,7 +53,7 @@ class LoginPage extends Component {
                                         <div className="login__fb">
                                             <img src={fb} width="15px" style={{ "marginRight":"5px" }} />Log in with Facebook
                                         </div>
-                                        <div className="login_forgt"> Forgot password?</div>
+                                        <div className="login_forgt"> Forgot password?</div> */}
                                    </div>
                                </div>
 
@@ -71,7 +71,7 @@ class LoginPage extends Component {
                                    
                                 </div>
 
-                                <div className="loginPage__downloadSection">
+                                {/* <div className="loginPage__downloadSection">
                                     <div>
                                     Get the app.
                                     </div>
@@ -79,7 +79,7 @@ class LoginPage extends Component {
                                         <img className="loginPage_dwimg" src={appstore} width="136px" />
                                         <img className="loginPage_dwimg" src={playstore} width="136px" />
                                     </div>
-                                </div>
+                                </div> */}
 
                            </div>
                        </div>

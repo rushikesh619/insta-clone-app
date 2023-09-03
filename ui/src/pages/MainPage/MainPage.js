@@ -37,7 +37,8 @@ class MainPage extends Component {
 
   getPost = () => {
     try {
-      axios.get("/api/posts/getAllPosts").then((res) => {
+      const token = localStorage.getItem('token');
+      axios.get("/api/posts/getAllPosts", {headers: {"auth-token": token}}).then((res) => {
         console.log(res.data.result);
         if (res) {
           this.setState({ postArray: res.data.result });
@@ -57,10 +58,12 @@ class MainPage extends Component {
     data.set("username", this.state.user.username);
 
     console.log(data);
+    const token = localStorage.getItem('token');
     axios
       .post(`/api/posts/createPost/${this.state.user._id}`, data, {
         headers: {
           "content-type": "multipart/form-data",
+          "auth-token": token
         },
       })
       .then((response) => {

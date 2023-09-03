@@ -92,11 +92,11 @@ const addComment = async (doc) => {
   }
 };
 
-const likePost = async (doc) => {
+const likePost = async (doc, username) => {
   try {
     const result = await Post.updateOne(
       { _id: doc.id },
-      { $push: { likes: doc.username } }
+      { $push: { likes: username } }
     );
     if (result.modifiedCount) {
       const output = { message: "OK", result: result };
@@ -111,17 +111,19 @@ const likePost = async (doc) => {
   }
 };
 
-const disLikePost = async (doc) => {
+const disLikePost = async (doc, username) => {
   try {
     const post = await Post.findOne({ _id: doc.id });
+    console.log("username: ", username, "post: ", post);
     let newLikes = [];
     newLikes = post.likes.filter((e) => {
-      if (e !== doc.username) {
+      if (e !== username) {
         return true;
       } else {
         return false;
       }
     });
+    console.log("newLikes: ", newLikes);
     console.log(newLikes);
     const result = await Post.updateOne({ _id: doc.id }, { likes: newLikes });
     if (result.modifiedCount) {

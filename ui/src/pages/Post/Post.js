@@ -33,14 +33,17 @@ export default function Post(props) {
   const [newComment, setNewComment] = useState("");
   const [liked, setLiked] = useState(false);
   const [likesArray, setLikesArray] = useState([]);
+  const [currUserUsername, setCurrUserUsername] = useState("");
 
   const classes = useStyles();
 
   useEffect(() => {
     if (props.likes) {
       setLikesArray(props.likes);
+      const user = JSON.parse(localStorage.getItem('user'));
+      setCurrUserUsername(user.username);
       props.likes?.forEach((e) => {
-        if (e === props.userName) {
+        if (e == user.userName) {
           setLiked(true);
         }
       });
@@ -54,15 +57,16 @@ export default function Post(props) {
     try {
       const data = {
         id: props.id,
-        username: props.userName,
+        username: currUserUsername,
       };
       console.log(data);
-      axios.post("/api/posts/likePost", data).then((res) => {
+      const token = localStorage.getItem('token');
+      axios.post("/api/posts/likePost", data, {headers: {"auth-token": token}}).then((res) => {
         console.log(res.data.result.message);
         if (res.data.result) {
           if (res.data.result.message === "OK") {
             setLiked(!liked);
-            setLikesArray([...likesArray, props.userName]);
+            setLikesArray([...likesArray, currUserUsername]);
           }
         } else {
           alert("something went wrong");
@@ -77,16 +81,17 @@ export default function Post(props) {
     try {
       const data = {
         id: props.id,
-        username: props.userName,
+        username: currUserUsername,
       };
       console.log(data);
-      axios.post("/api/posts/disLikePost", data).then((res) => {
+      const token = localStorage.getItem('token');
+      axios.post("/api/posts/disLikePost", data, {headers: {"auth-token": token}}).then((res) => {
         console.log(res.data.result.message);
         if (res.data.result) {
           if (res.data.result.message === "OK") {
             setLiked(!liked);
             let arr = likesArray;
-            const index = arr.indexOf(props.userName);
+            const index = arr.indexOf(currUserUsername);
             if (index > -1) {
               arr.splice(index, 1);
             }
@@ -108,7 +113,8 @@ export default function Post(props) {
         comment: newComment,
       };
       console.log(data);
-      axios.post("/api/posts/addComment", data).then((res) => {
+      const token = localStorage.getItem('token');
+      axios.post("/api/posts/addComment", data, {headers: {"auth-token": token}}).then((res) => {
         console.log(res.data.result.message);
         if (res.data.result) {
           if (res.data.result.message) {

@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const postServcices = require("../services/postServices");
+const authFun = require("./auth");
 
-router.get("/getAllPosts", async (req, res) => {
+router.get("/getAllPosts", authFun, async (req, res) => {
   try {
     const result = await postServcices.getAllPosts();
     console.log(result);
@@ -12,7 +13,7 @@ router.get("/getAllPosts", async (req, res) => {
   }
 });
 
-router.post("/addComment", async (req, res) => {
+router.post("/addComment", authFun, async (req, res) => {
   try {
     console.log(req.body);
     const result = await postServcices.addComment(req.body);
@@ -24,9 +25,9 @@ router.post("/addComment", async (req, res) => {
   }
 });
 
-router.post("/likePost", async (req, res) => {
+router.post("/likePost", authFun, async (req, res) => {
   try {
-    const result = await postServcices.likePost(req.body);
+    const result = await postServcices.likePost(req.body, req.user.username);
     res.status(200).json({ result: result });
   } catch (ex) {
     console.log(ex);
@@ -34,9 +35,9 @@ router.post("/likePost", async (req, res) => {
   }
 });
 
-router.post("/disLikePost", async (req, res) => {
+router.post("/disLikePost", authFun, async (req, res) => {
   try {
-    const result = await postServcices.disLikePost(req.body);
+    const result = await postServcices.disLikePost(req.body, req.user.username);
     res.status(200).json({ result: result });
   } catch (ex) {
     console.log(ex);
@@ -44,7 +45,7 @@ router.post("/disLikePost", async (req, res) => {
   }
 });
 
-router.post("/createPost/:id", async (req, res) => {
+router.post("/createPost/:id", authFun, async (req, res) => {
   if (!req.files) {
     return res.status(400).send("No files were uploaded.");
   }

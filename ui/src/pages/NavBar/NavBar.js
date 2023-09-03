@@ -8,6 +8,7 @@ import find from "../../images/find.svg";
 import react from "../../images/love.svg";
 import Avatar from '@material-ui/core/Avatar';
 import img from "../../images/img.jpg"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 class NavBar extends Component {
     constructor(props) {
