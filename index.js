@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const fileupload = require("express-fileupload");
 const app = express();
 const api = require("./apis");
+const fs = require('fs');
+
+const file = fs.readFileSync('./4E75AAD80F6FB58EF455E7F540B258DF.txt');
 
 mongoose
   .connect(process.env.DB_CONNECT)
@@ -33,9 +36,9 @@ app.use(fileupload({
 app.get("*.*", express.static(__dirname + "/ui/build"));
 
 api(app);
-
-app.all("*", function (req, res) {
-  res.status(200).sendFile(`/`, { root: __dirname + "/ui/build" });
+app.get("*.*", express.static(__dirname + "/ui/build"));
+app.all("/.well-known/pki-validation/4E75AAD80F6FB58EF455E7F540B258DF.txt", (req, res) => {
+  res.sendFile(`/home/ec2-user@ip-172-31-6-227/insta-clone-app/4E75AAD80F6FB58EF455E7F540B258DF.txt`);
 });
 
 const port = process.env.PORT || 3001;
